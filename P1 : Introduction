@@ -1,0 +1,51 @@
+# Vektor
+#Membuat Vektor
+vec <- c(80, 50, 20, 92)
+
+#Akses Vektor elemen ke-2
+vec[2]
+
+#pie chart
+JumlahMobil <- c(1,2,5,7,9)
+warna <- c("yellow", "pink", "darkred", "grey50", "black")
+labelmobil <- round(JumlahMobil/sum(JumlahMobil)*100,1)
+labelmobil <- paste(labelmobil, "%", sep = "")
+pie(JumlahMobil, main = "presentasi mobil di parkiran",col = warna, labels = labelmobil, cex=0.8)  
+legend(1.4, 0.5,c("Senin","Selasa","Rabu","Kamis","Jumat"),cex=0.7,fill=warna) #cex itu buat size table nya, terus setelah legend ukuran x,y
+
+
+#line chart
+JumlahMotor<-c(2,4,4,8,10)
+g_range<-range(0,JumlahMotor,JumlahMobil)
+plot(JumlahMobil,type="o",col="blue",ylin=g_range,axes=FALSE,ann=FALSE)
+axis(1,at=1:5,lab=c("Senin","Selasa","Rabu","Kamis","Jumat"))
+axis(2,las=1,at=4*0:g_range[2])
+box()         #buat bikin box nya
+lines(JumlahMotor,type='o',pch=22,lyt=2,col="red")
+title(main="Kendaraan Bermotor",col.main="red",font.main=4)
+title(xlab="Hari",col.lab=rgb(0,0.5,0))
+title(ylab="Jumlah",col.lab=rgb(0,0.5,0))
+legend(1,g_range[2]-1,c("Mobil","Motor"),cex=0.8,col=c("blue","red"),pch=21:22,lty=1:2)
+
+#pie chart
+JumlahMobil <- c(1,2,5,7,9)
+warna <- c("yellow", "pink", "darkred", "grey50", "black")
+labelmobil <- round(JumlahMobil/sum(JumlahMobil)*100,1)
+labelmobil <- paste(labelmobil, "%", sep = "")
+pie(JumlahMobil, main = "presentasi mobil di parkiran",col = warna, labels = labelmobil, cex=0.8)  
+legend(1.4, 0.5,c("Senin","Selasa","Rabu","Kamis","Jumat"),cex=0.7,fill=warna) #cex itu buat size table nya, terus setelah legend ukuran x,y
+
+
+#line chart
+JumlahMotor<-c(2,4,4,8,10)
+g_range<-range(0,JumlahMotor,JumlahMobil)
+plot(JumlahMobil,type="o",col="blue",ylin=g_range,axes=FALSE,ann=FALSE)
+axis(1,at=1:5,lab=c("Senin","Selasa","Rabu","Kamis","Jumat"))
+axis(2,las=1,at=4*0:g_range[2])
+box()         #buat bikin box nya
+lines(JumlahMotor,type='o',pch=22,lyt=2,col="red")
+title(main="Kendaraan Bermotor",col.main="red",font.main=4)
+title(xlab="Hari",col.lab=rgb(0,0.5,0))
+title(ylab="Jumlah",col.lab=rgb(0,0.5,0))
+legend(1,g_range[2]-1,c("Mobil","Motor"),cex=0.8,col=c("blue","red"),pch=21:22,lty=1:2)
+
