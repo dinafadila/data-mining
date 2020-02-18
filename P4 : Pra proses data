@@ -1,0 +1,109 @@
+# NA : not available untuk menggantikan missing value
+NA + 1
+sum(c(NA, 1, 2))
+median(c(NA, 1, 2, 3), na.rm = TRUE) # NA ga dianggap
+length(c(NA, 2, 3, 4))               # NA dianggap
+3 == NA
+NA == NA
+TRUE | NA
+
+# NULL : nilai kosong, panjangnya 0, NULL ga dianggap ada
+length(c(1, 2, NULL, 4))
+sum(c(1, 2, NULL, 4))
+x <- NULL
+c(x, 2)
+
+# INF : infinity, di kelas numerik
+pi/0
+2 * Inf
+Inf - 1e+10
+Inf + Inf
+3 < -Inf
+Inf == Inf
+
+# NaN : not a number, hasil perhitungan yang tidak diketahui
+NaN + 1
+exp(NaN)
+
+
+#1 eksplorasi data
+data<-airquality
+str(data)
+summary(data)
+
+#2 untuk mengetahui jumlah missing value
+library(mice)
+data<-airquality
+md.pattern(data) 
+
+#kalo dari samping baca tablenya :
+#  ada 35 data yang nilai ozonnya missing
+#  ada 2 data yang nilai solar dan ozonnya missing
+#kalo dari bawah bacanya :
+#  ada 7 data yang solarnya missing
+#  ada 37 data yang ozonnya missing
+
+#3 pembersihan data
+# mengisi missing value dengan rata2
+data<-airquality
+
+#mengisikan nilai mean untuk missing value di atributSolar.R
+# is.na : buat nyari indeks yang ada NA nya, yang TRUE : masukin nilai NA
+data$Solar.R[is.na(data$Solar.R)] <- mean (data$Solar.R,na.rm= TRUE)
+md.pattern(data)
+
+#untuk katagorik isi dengan modus
+names(sort(-table(data$Month)))[1]
+md.pattern(data)
+
+#4 transformasi data
+data$bulan<-NULL
+data$bulan[data$Month == 5] <- "Mei"
+data$bulan[data$Month == 6] <- "Juni"
+data$bulan[data$Month == 7] <- "Juli"
+data$bulan[data$Month == 8] <- "Agustus"
+data$bulan[data$Month == 9] <- "September"
+
+data
+
+#5 reduksi data
+#menghapus variable
+data$bulan<-NULL
+
+#sampling, ingin melihat data yang month>7 dan wind>=10
+dataBaru<-data [which(data$Month>7 & data$Wind>=10),]
+
+#memilih data random, replace=FALSE gunanya biar data yg diambil random gak berulang itu2 aja
+dataRandom<-data[sample(1:nrow(data),50,replace=FALSE),]
+
+#6 integrasi data
+#menggabungkan dataset dibagian kolom, syarat:jumlah baris harus sama
+total <- merge(dataframeA,dataframeB,by="ID")
+# menggabungkan 2 dataset secara baris, syarat:jumlah kolom harus sama.
+# contoh penggabungan data dari tahap reduksi
+sampling data > dataGabung<- rbind(dataBaru,dataRandom)
+
+#cbind jumlah baris harus sama kurang disarankan digunakan buat integrasi, kecuali datanya udah urut berdasarkan ID. karna dia gabunginnya sesuai urutan
+#rbind jumlah kolom harus sama
+#merge bakal digabungin by ID 
+
+#7 Diskretisasi Data
+#Contoh membagi atribut wind menjadi 3 kelompok, data binning pake fungsi cut
+data$Wind<-cut (data$Wind, 3, include.lowest =TRUE)
+
+install.packages(“infotheo”)
+library(infotheo)
+#contoh melakukan diskretisasi pada atribut sepaldengan membagi menjadi 3 kategori dengan metode equalwidth
+ew.SSCGPA <- discretize(data$SSGCPA.Length,"equalwidth", 4)
+
+#contoh melakukan diskretisasi pada atribut petaldengan membagi menjadi 3 kategori dengan metode equalfrequency
+ef.Petal <- discretize(data$Petal.Length,"equalfreq", 3)
+
+install.packages("discretization")
+library(discretization)
+
+# normalisasi min max
+for (i in 1:length(data$Ozone)) {
+  data$Ozone[i] = (data$Ozone[i] - min(data$Ozone)) / (max(data$Ozone)-min(data$Ozone))
+}
+summary(data$Ozone)
