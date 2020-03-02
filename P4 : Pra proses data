@@ -53,7 +53,7 @@ data$Solar.R[is.na(data$Solar.R)] <- mean (data$Solar.R,na.rm= TRUE)
 md.pattern(data)
 
 #untuk katagorik isi dengan modus
-names(sort(-table(data$Month)))[1]
+data$Month[is.na(data$Month)] <- names(sort(-table(data$Month)))[1]
 md.pattern(data)
 
 #4 transformasi data
