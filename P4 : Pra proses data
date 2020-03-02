@@ -1,4 +1,4 @@
-# NA : not available untuk menggantikan missing value
+# NA : not available 
 NA + 1
 sum(c(NA, 1, 2))
 median(c(NA, 1, 2, 3), na.rm = TRUE) # NA ga dianggap
